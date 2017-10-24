@@ -1,0 +1,2 @@
+model_checkpoint_path: "/home/cougarnet.uh.edu/txu11/Desktop/medicalImage_classification/model/model_saved/model0/model0.tfl"
+all_model_checkpoint_paths: "/home/cougarnet.uh.edu/txu11/Desktop/medicalImage_classification/model/model_saved/model0/model0.tfl"
