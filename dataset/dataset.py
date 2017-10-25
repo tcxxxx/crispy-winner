@@ -54,7 +54,10 @@ def bing_search(query, count=8, offset=0):
         'Content-Type': 'multipart/form-data',
         'Ocp-Apim-Subscription-Key': 'cd2f8800f47840fda58b777410b41a7e'
     }
-    response = requests.post(url, params=payload, headers=headers)
+    try:
+        response = requests.post(url, params=payload, headers=headers)
+    except:
+        print "damn!"
     return response.json()
 
 def dataFrame(result):
@@ -158,8 +161,10 @@ def download(dFrame, dir_path, imageNo):
                     os.mkdir(img_dir)
 
                 # Save this original image.
-                with open(img_dir + '/' + 'image' + str(imageNo) + '.' + pic_encoding, 'wb') as picF:
+                orig_file = img_dir + '/' + 'image' + str(imageNo) + '.' + pic_encoding
+                with open(orig_file, 'wb') as picF:
                     picF.write(pic.content)
+                print "Saving %s" % orig_file
 
                 # Get the insight of this original image.
                 result_insight = bing_search_adv(pic_id, pic_insightsToken)
@@ -185,10 +190,11 @@ def download(dFrame, dir_path, imageNo):
 
                         # Save the derivative images.
                         if simi_pic.status_code == 200:
-                            with open(simi_dir + '/' + 'simi_img' + str(simi_num) + '.' + simi_pic_format,
-                                      'wb') as simi_picF:
+                            simi_file = simi_dir + '/' + 'simi_img' + str(simi_num) + '.' + simi_pic_format
+                            with open(simi_file, 'wb') as simi_picF:
                                 simi_picF.write(simi_pic.content)
                             simi_num += 1
+                            print "Saving %s" % simi_file
 
 def download_images(dFrame, query):
     """Downloads all the images.
@@ -227,6 +233,7 @@ def download_images(dFrame, query):
     urllib3.disable_warnings()
     p = Pool()
     for imageNo in range(dFrame.shape[0]):
+        # download(dFrame, dir_path, imageNo)
         p.apply_async(download, args=(dFrame, dir_path, imageNo,))
     p.close()
     p.join()
@@ -255,6 +262,11 @@ def generate_file_list(root_dir, label=1):
     for img_dir_no in os.listdir(root_dir):
         img_dir = os.path.join(root_dir, img_dir_no)
         img_dir_similar = os.path.join(img_dir, "similar_images")
+        
+        # for mac
+        if '.DS_Store' in img_dir:
+            continue
+
         for item in os.listdir(img_dir):
             try:
                 if item == "similar_images":
@@ -282,7 +294,7 @@ def generate_file_list(root_dir, label=1):
             F.write(item + '\n')
     return
     
-def dataset(query, count=8):
+def dataset(query, count=10):
     """Wraps up the whole procedure to obtain data.
 
     Args:
@@ -304,7 +316,6 @@ def dataset(query, count=8):
 def checkCurrentData(query):
     """
     """
-    
     extension = ".txt"
     dataset_dir = os.getcwd() + "/dataset"
     dir_list = os.listdir(dataset_dir)
@@ -336,4 +347,3 @@ if __name__ == "__main__":
     dataset(query, )
     t_end = time.time()
     print "Data set for %s downloaded in %0.2f seconds." % (query, (t_end - t_start))
-    
