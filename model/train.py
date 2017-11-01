@@ -64,7 +64,7 @@ class Model(object):
         return network
 
     def train(self, X, Y):
-        self.model.fit(X, Y, n_epoch=40, validation_set=0.2, shuffle=True,
+        self.model.fit(X, Y, n_epoch=80, validation_set=0.2, shuffle=True,
                   show_metric=True, batch_size=16, snapshot_step=200,
                   snapshot_epoch=True, run_id=self.runId)
 
@@ -111,18 +111,53 @@ class Model_Combination(object):
             self.model.load(mfn, scope_for_restore="scope3", weights_only=True)
 
     def train(self, X, Y):
-        self.model.fit(X, Y, n_epoch=40, validation_set=0.2, shuffle=True,
+        self.model.fit(X, Y, n_epoch=80, validation_set=0.2, shuffle=True,
                   show_metric=True, batch_size=16, snapshot_step=200,
                   snapshot_epoch=True, run_id=self.runId)
 
 X0, Y0 = image_preloader(dataset_file, image_shape=(100, 100), mode='file', categorical_labels=True, normalize=True, filter_channel=True)
-
+X1, Y1 = image_preloader(sub1_file, image_shape=(100, 100), mode='file', categorical_labels=True, normalize=True, filter_channel=True)
+X2, Y2 = image_preloader(sub2_file, image_shape=(100, 100), mode='file', categorical_labels=True, normalize=True, filter_channel=True)
+X3, Y3 = image_preloader(sub3_file, image_shape=(100, 100), mode='file', categorical_labels=True, normalize=True, filter_channel=True)
 def train_model0():
     tf.reset_default_graph()
     m0 = Model("alexnet-model0")
     m0.train(X0, Y0)
     m0.model.save("model/model_saved/model0/model0.tfl")
 
+def train_model1():
+    tf.reset_default_graph()
+    m1 = Model("sub-model1")
+    m1.train(X1, Y1)
+    m1.model.save("model/model_saved/model1/model1.tfl")
+
+def train_model2():
+    tf.reset_default_graph()
+    m2 = Model("sub-model2")
+    m2.train(X2, Y2)
+    m2.model.save("model/model_saved/model2/model2.tfl")
+
+def train_model3():
+    tf.reset_default_graph()
+    m3 = Model("sub-model3")
+    m3.train(X3, Y3)
+    m3.model.save("model/model_saved/model3/model3.tfl")
+
+def train_combination_model():
+    tf.reset_default_graph()
+    m4 = Model_Combination("model-combination")
+    m4.load_weights(
+        "model/model_saved/model1/model1.tfl", 
+        "model/model_saved/model2/model2.tfl", 
+        "model/model_saved/model3/model3.tfl"
+    )
+    m4.train(X0, Y0)
+    m4.model.save("model/model_saved/model4/model4.tfl")
+
 if __name__ == "__main__":
     train_model0()
-    
+    train_model1()
+    train_model2()
+    train_model3()
+    train_combination_model()
+
