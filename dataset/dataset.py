@@ -196,7 +196,7 @@ def download(dFrame, dir_path, imageNo):
                             simi_num += 1
                             print "Saving %s" % simi_file
 
-def download_images(dFrame, query):
+def download_images(dFrame, query, flag):
     """Downloads all the images.
 
     The specific module used for downloading is the Requests module.(http://docs.python-requests.org/en/master/)
@@ -222,7 +222,11 @@ def download_images(dFrame, query):
     # Set the desired directory for the data set at here.
     querystr = querystr.join(query.split(' '))
     ## dir_path = str(os.getcwd()) + '/dataset/' + querystr + '-' + unique_id
-    dir_path = str(os.path.split(os.path.realpath(__file__))[0]) + '/' + querystr + '-' + unique_id
+    if flag == False:
+        # subset
+        dir_path = str(os.path.split(os.path.realpath(__file__))[0]) + '/sub_datasets/' + querystr + '-' + unique_id
+    else:
+        dir_path = str(os.path.split(os.path.realpath(__file__))[0]) + '/' + querystr + '-' + unique_id
     # print dir_path
     
     if os.path.exists(dir_path):
@@ -294,12 +298,13 @@ def generate_file_list(root_dir, label=1):
             F.write(item + '\n')
     return
     
-def dataset(query, count=10):
+def dataset(query, count=10, flag = True):
     """Wraps up the whole procedure to obtain data.
 
     Args:
         query: Query term for target data set.
         count: Number of original images set. count * 100 is approximately the size of the whole date set.
+        flag: 
 
     Returns:
         None. The dataset will be saved to the same directory with which this script runs.
@@ -310,7 +315,7 @@ def dataset(query, count=10):
 
     result = bing_search(query, count)
     dFrame = dataFrame(result.get('value', {}))
-    dir_path = download_images(dFrame, query)
+    dir_path = download_images(dFrame, query, flag)
     generate_file_list(dir_path)
 
 def checkCurrentData(query):
@@ -322,28 +327,40 @@ def checkCurrentData(query):
     dir_for_query = ''
 
     for item in dir_list:
-        if (query in item) and (extension in item):
+        item = item.lower()
+        if (query.lower() in item) and (extension in item):
              dir_for_query = item.split('.')[0]
              # print dir_for_query
     
     if len(dir_for_query) != 0:
         generate_file_list(dataset_dir + '/' + dir_for_query, label=1)        
-        return True    
+        return True
 
 if __name__ == "__main__":
-    if len(sys.argv) != 2: 
-        print "Usage: python %s 'QUERY TERM'" % (sys.argv[0])
+    sub_flag = ""
+    if len(sys.argv) < 2: 
+        print "Usage: python %s 'QUERY TERM' (optional) 'SUB' " % (sys.argv[0])
         sys.exit()
+
     query = sys.argv[1]
-    
-    if checkCurrentData(query):
-        print "Data set for <%s> exists and seems good." % (query) 
-        sys.exit()
-        
+    if len(sys.argv) == 3:
+        sub_flag = sys.argv[2]
+        # print "SUB"
+    else:
+        # dataset for diseases
+        if checkCurrentData(query):
+            print "Data set for <%s> exists and seems good." % (query) 
+            sys.exit()
+
     print "Start downloading data set for <%s>." % (query)
     t_start = time.time()
     # Set the second parameter to change the number of results.
     # For current version of the script, (count >= 150) can cause problems.
-    dataset(query, )
+    if sub_flag != "":
+        print "SUB"
+        dataset(query, count = 10, flag = False)
+    else:
+        print "MAIN"
+        dataset(query, count = 10, flag = True)
     t_end = time.time()
     print "Data set for %s downloaded in %0.2f seconds." % (query, (t_end - t_start))
