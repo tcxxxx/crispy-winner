@@ -11,3 +11,10 @@ This project is divided into **three** parts:
 1. Data collection
 2. Model training
 3. Web / Application for display
+
+##### Current To-do list:
+- [ ] Find a practical method to filter and clean the Internet data.
+      (clustering or filtering based on image texts)
+- [ ] Improve the Neural Network architecture.
+      (Refine on hyperparameters or Switch the whole architecture)
+- [ ] Initialize the website for simple upload and prediction.
