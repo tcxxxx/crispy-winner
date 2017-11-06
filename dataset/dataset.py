@@ -349,7 +349,7 @@ if __name__ == "__main__":
     else:
         # dataset for diseases
         if checkCurrentData(query):
-            print "Data set for <%s> exists and seems good." % (query) 
+            print "Dataset <%s> exists and seems good." % (query) 
             sys.exit()
 
     print "Start downloading data set for <%s>." % (query)
@@ -363,4 +363,4 @@ if __name__ == "__main__":
         print "MAIN"
         dataset(query, count = 10, flag = True)
     t_end = time.time()
-    print "Data set for %s downloaded in %0.2f seconds." % (query, (t_end - t_start))
+    print "Dataset %s downloaded in %0.2f seconds." % (query, (t_end - t_start))

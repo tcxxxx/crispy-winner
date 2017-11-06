@@ -59,7 +59,7 @@ class Model(object):
         network = dropout(network, 0.5)
 
         if mode == True:
-            network = fully_connected(network, 4, activation='softmax')
+            network = fully_connected(network, 3, activation='softmax')
 
         return network
 
@@ -119,6 +119,7 @@ X0, Y0 = image_preloader(dataset_file, image_shape=(100, 100), mode='file', cate
 X1, Y1 = image_preloader(sub1_file, image_shape=(100, 100), mode='file', categorical_labels=True, normalize=True, filter_channel=True)
 X2, Y2 = image_preloader(sub2_file, image_shape=(100, 100), mode='file', categorical_labels=True, normalize=True, filter_channel=True)
 X3, Y3 = image_preloader(sub3_file, image_shape=(100, 100), mode='file', categorical_labels=True, normalize=True, filter_channel=True)
+
 def train_model0():
     tf.reset_default_graph()
     m0 = Model("alexnet-model0")

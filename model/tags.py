@@ -42,10 +42,18 @@ def tag_disease(target_diseases):
     with open('./' + 'dataset' + extension, 'w+') as F:
         for tagNum in range(0, len(lines)):
             for i in lines[tagNum]:
-                F.write(i.strip('\n') + " " + str(tagNum) + "\n")
-                
+                F.write(i.strip('\n') + " " + str(tagNum + 1) + "\n")
+
+def get_symptoms():
+    pass
+
+def tag_symptoms(target_symptoms_list):
+    pass
+               
 if __name__ == "__main__":
     target_diseases_list = []
+    target_symptoms_list = []
+
     disease_num = len(sys.argv) - 1
     print "number of diseases:" + str(disease_num)
     
@@ -54,12 +62,20 @@ if __name__ == "__main__":
     for dNo in range(1, disease_num + 1):
         symptoms_list = []
         print sys.argv[dNo].strip(',')
+        
         for symptom in sub_list:
             if str(dNo) in symptom:
-                print symptom.strip('\n')
-        target_diseases_list.append(sys.argv[dNo].strip(','))
-    print target_diseases_list
-    # print sub_list
-    file.close()
+                symptoms_list.append(symptom[2:].strip('\n'))
 
-    # tag_disease(target_diseases_list)
+        target_diseases_list.append(sys.argv[dNo].strip(','))
+        target_symptoms_list.append(symptoms_list)
+    file.close()
+    
+    # print target_diseases_list
+    # print target_symptoms_list
+    
+    # tag diseases:
+    tag_disease(target_diseases_list)
+    # tag symptoms:
+    tag_symptoms(target_symptoms_list)
+
