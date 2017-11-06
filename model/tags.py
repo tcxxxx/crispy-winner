@@ -44,11 +44,43 @@ def tag_disease(target_diseases):
             for i in lines[tagNum]:
                 F.write(i.strip('\n') + " " + str(tagNum + 1) + "\n")
 
-def get_symptoms():
-    pass
+def get_symptoms(path):
+    extension = ".txt"
+    symptom_dict = {}
+    temp = ''
+    for item in os.listdir(path):
+        # here we filter all the files
+        if extension in item:
+            symptom_name = item.split('.')[0][:-11]
+            symptom_name = temp.join(symptom_name.split('-'))
+            symptom_dict[symptom_name.lower()] = item[:-4]
+    return symptom_dict
 
-def tag_symptoms(target_symptoms_list):
-    pass
+def tag_symptoms(target_symptoms):
+    path = str(os.getcwd() + '/dataset/sub_datasets')
+    extension = ".txt"
+    symptom_dict = get_symptoms(path)
+    print symptom_dict
+    print target_symptoms
+    num = 0
+    
+    for set in target_symptoms:
+        dict_list = []
+        lines = []
+        for s in set:
+            s = ''.join(s.strip().split())
+            symptom_dir = symptom_dict[s.lower()]
+            with open(path + '/' + symptom_dir + extension, 'r+') as F:
+                lines.append(F.readlines())
+
+        num += 1
+        print "num: " + str(num)
+
+        with open('./' + 'sub_file' + str(num) + extension, 'w+') as F:
+            for setNum in range(0, len(lines)):
+                # for fileNum in range(0, len(lines[setNum])):
+                for i in lines[setNum]:
+                    F.write(i.strip('\n') + " " + str(num) + "\n")
                
 if __name__ == "__main__":
     target_diseases_list = []
@@ -75,7 +107,7 @@ if __name__ == "__main__":
     # print target_symptoms_list
     
     # tag diseases:
-    tag_disease(target_diseases_list)
+    # tag_disease(target_diseases_list)
     # tag symptoms:
     tag_symptoms(target_symptoms_list)
 
