@@ -48,7 +48,18 @@ if __name__ == "__main__":
     target_diseases_list = []
     disease_num = len(sys.argv) - 1
     print "number of diseases:" + str(disease_num)
+    
+    file = open('sub.list')
+    sub_list = file.readlines()
     for dNo in range(1, disease_num + 1):
+        symptoms_list = []
+        print sys.argv[dNo].strip(',')
+        for symptom in sub_list:
+            if str(dNo) in symptom:
+                print symptom.strip('\n')
         target_diseases_list.append(sys.argv[dNo].strip(','))
-    # print target_diseases_list
-    tag_disease(target_diseases_list)
+    print target_diseases_list
+    # print sub_list
+    file.close()
+
+    # tag_disease(target_diseases_list)
