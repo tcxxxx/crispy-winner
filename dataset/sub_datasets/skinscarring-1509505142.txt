@@ -49,12 +49,10 @@
 /Users/vincent/Desktop/crispy-winner/dataset/sub_datasets/skinscarring-1509505142/img00/similar_images/simi_img53.jpeg
 /Users/vincent/Desktop/crispy-winner/dataset/sub_datasets/skinscarring-1509505142/img00/similar_images/simi_img54.jpeg
 /Users/vincent/Desktop/crispy-winner/dataset/sub_datasets/skinscarring-1509505142/img00/similar_images/simi_img55.jpeg
-/Users/vincent/Desktop/crispy-winner/dataset/sub_datasets/skinscarring-1509505142/img00/similar_images/simi_img56.jpeg
 /Users/vincent/Desktop/crispy-winner/dataset/sub_datasets/skinscarring-1509505142/img00/similar_images/simi_img57.jpeg
 /Users/vincent/Desktop/crispy-winner/dataset/sub_datasets/skinscarring-1509505142/img00/similar_images/simi_img58.jpeg
 /Users/vincent/Desktop/crispy-winner/dataset/sub_datasets/skinscarring-1509505142/img00/similar_images/simi_img59.jpeg
 /Users/vincent/Desktop/crispy-winner/dataset/sub_datasets/skinscarring-1509505142/img00/similar_images/simi_img6.jpeg
-/Users/vincent/Desktop/crispy-winner/dataset/sub_datasets/skinscarring-1509505142/img00/similar_images/simi_img60.jpeg
 /Users/vincent/Desktop/crispy-winner/dataset/sub_datasets/skinscarring-1509505142/img00/similar_images/simi_img61.jpeg
 /Users/vincent/Desktop/crispy-winner/dataset/sub_datasets/skinscarring-1509505142/img00/similar_images/simi_img62.jpeg
 /Users/vincent/Desktop/crispy-winner/dataset/sub_datasets/skinscarring-1509505142/img00/similar_images/simi_img63.jpeg

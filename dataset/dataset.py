@@ -12,6 +12,8 @@ import sys
 from multiprocessing import Pool
 from PIL import Image
 
+# To-do: remove obviously flawed images(duplicated ones; damaged ones)
+
 def bing_search(query, count=8, offset=0):
     """Invokes Bing Image Search API to obtain images.
     Official documentation by Azure:
@@ -304,7 +306,7 @@ def dataset(query, count=10, flag = True):
     Args:
         query: Query term for target data set.
         count: Number of original images set. count * 100 is approximately the size of the whole date set.
-        flag: 
+        flag: True -> datasets for diseases; False -> datasets for symptoms;
 
     Returns:
         None. The dataset will be saved to the same directory with which this script runs.
@@ -358,9 +360,9 @@ if __name__ == "__main__":
     # For current version of the script, (count >= 150) can cause problems.
     if sub_flag != "":
         print "SUB"
-        dataset(query, count = 10, flag = False)
+        dataset(query, count = 20, flag = False)
     else:
         print "MAIN"
-        dataset(query, count = 10, flag = True)
+        dataset(query, count = 20, flag = True)
     t_end = time.time()
     print "Dataset %s downloaded in %0.2f seconds." % (query, (t_end - t_start))

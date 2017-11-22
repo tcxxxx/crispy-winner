@@ -14,9 +14,9 @@ os.environ["CUDA_VISIBLE_DEVICES"]="0"
 os.environ["PYTHONUNBUFFERED"]="1"
 
 dataset_file = 'dataset.txt'
-sub1_file = ''
-sub2_file = ''
-sub3_file = ''
+sub_file1 = 'sub_file1.txt'
+sub_file2 = 'sub_file2.txt'
+sub_file3 = 'sub_file3.txt'
 
 class Model(object):
     '''
@@ -59,7 +59,7 @@ class Model(object):
         network = dropout(network, 0.5)
 
         if mode == True:
-            network = fully_connected(network, 3, activation='softmax')
+            network = fully_connected(network, 4, activation='softmax')
 
         return network
 
@@ -74,7 +74,7 @@ class Model_Combination(object):
     '''
     def __init__(self, runId):
         self.runId = runId
-        inputs = input_data(shape=[None, 100, 100, 3], name="input")
+        inputs = input_data(shape=[None, 100, 100, 4], name="input")
 
         with tf.variable_scope("scope0") as scope:
             net_alex0 = Model.make_core_network(inputs, mode=False)
@@ -90,7 +90,7 @@ class Model_Combination(object):
         network = dropout(network, 0.5)
         network = fully_connected(network, 256 * 3, activation='tanh')   # 256
         network = dropout(network, 0.5)
-        network = tflearn.fully_connected(network, 2, activation="softmax")
+        network = tflearn.fully_connected(network, 4, activation="softmax")
         network = regression(network, optimizer='momentum', learning_rate=0.001, loss='categorical_crossentropy', name='target')
         self.model = tflearn.DNN(network, tensorboard_verbose=0)
 
@@ -116,9 +116,9 @@ class Model_Combination(object):
                   snapshot_epoch=True, run_id=self.runId)
 
 X0, Y0 = image_preloader(dataset_file, image_shape=(100, 100), mode='file', categorical_labels=True, normalize=True, filter_channel=True)
-X1, Y1 = image_preloader(sub1_file, image_shape=(100, 100), mode='file', categorical_labels=True, normalize=True, filter_channel=True)
-X2, Y2 = image_preloader(sub2_file, image_shape=(100, 100), mode='file', categorical_labels=True, normalize=True, filter_channel=True)
-X3, Y3 = image_preloader(sub3_file, image_shape=(100, 100), mode='file', categorical_labels=True, normalize=True, filter_channel=True)
+X1, Y1 = image_preloader(sub_file1, image_shape=(100, 100), mode='file', categorical_labels=True, normalize=True, filter_channel=True)
+X2, Y2 = image_preloader(sub_file2, image_shape=(100, 100), mode='file', categorical_labels=True, normalize=True, filter_channel=True)
+X3, Y3 = image_preloader(sub_file3, image_shape=(100, 100), mode='file', categorical_labels=True, normalize=True, filter_channel=True)
 
 def train_model0():
     tf.reset_default_graph()

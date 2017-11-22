@@ -30,7 +30,13 @@ def tag_disease(target_diseases):
     path = str(os.getcwd() + '/dataset')
     extension = ".txt"
     lines = []
+    skinLines = []
     disease_dict = match_diseaseNames_to_datasets(path)
+
+    skin_path = str(os.getcwd() + '/dataset/normalskin.txt')
+    with open(skin_path, 'r+') as sF:
+        skinLines.append(sF.readlines())
+
     for d in target_diseases:
         if d.lower() in disease_dict.keys():
             disease_dir = disease_dict[d.lower()]
@@ -42,6 +48,9 @@ def tag_disease(target_diseases):
             
     backup_datasetTxt()
     with open('./' + 'dataset' + extension, 'w+') as F:
+        for s in skinLines[0]:
+            F.write(s.strip('\n') + " " + str('0') + "\n")
+
         for tagNum in range(0, len(lines)):
             for i in lines[tagNum]:
                 F.write(i.strip('\n') + " " + str(tagNum + 1) + "\n")
@@ -127,6 +136,7 @@ def generate_file_list(root_dir, label=1):
                                 tempF = Image.open(item_path)
                             except Exception as e:
                                 print e
+                                os.remove(item_path)
                                 pass
                             else:
                                 statinfo = os.stat(item_path)
@@ -141,6 +151,23 @@ def generate_file_list(root_dir, label=1):
         for item in item_list:
             F.write(item + '\n')
     return
+
+def checkCurrentData(query):
+    """
+    """
+    extension = ".txt"
+    dataset_dir = os.getcwd() + "/dataset/sub_datasets"
+    dir_list = os.listdir(dataset_dir)
+    dir_for_query = ''
+
+    for item in dir_list:
+        item = item.lower()
+        if (query.lower() in item) and (extension in item):
+            dir_for_query = item.split('.')[0]
+    
+    if len(dir_for_query) != 0:
+        generate_file_list('dataset/sub_datasets/' + dir_for_query, label=1)        
+        return True
 
 def add_humanSkin():
     return
@@ -165,14 +192,15 @@ if __name__ == "__main__":
         target_diseases_list.append(sys.argv[dNo].strip(','))
         target_symptoms_list.append(symptoms_list)
     file.close()
-
     '''
     print "\ndiseases: "
     print target_diseases_list
     print "\nsymptoms: "
     print target_symptoms_list
     '''
-
+    for set in target_symptoms_list:
+        for symptom in set:
+            checkCurrentData(symptom.replace(" ", ""))
     # tag diseases:
     tag_disease(target_diseases_list)
     # tag symptoms:

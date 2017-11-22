@@ -37,7 +37,6 @@
 /Users/vincent/Desktop/crispy-winner/dataset/melanoma-1508897682/img00/similar_images/simi_img41.jpeg
 /Users/vincent/Desktop/crispy-winner/dataset/melanoma-1508897682/img00/similar_images/simi_img42.jpeg
 /Users/vincent/Desktop/crispy-winner/dataset/melanoma-1508897682/img00/similar_images/simi_img44.jpeg
-/Users/vincent/Desktop/crispy-winner/dataset/melanoma-1508897682/img00/similar_images/simi_img45 (1).jpeg
 /Users/vincent/Desktop/crispy-winner/dataset/melanoma-1508897682/img00/similar_images/simi_img45.jpeg
 /Users/vincent/Desktop/crispy-winner/dataset/melanoma-1508897682/img00/similar_images/simi_img46.jpeg
 /Users/vincent/Desktop/crispy-winner/dataset/melanoma-1508897682/img00/similar_images/simi_img47.jpeg
@@ -649,7 +648,6 @@
 /Users/vincent/Desktop/crispy-winner/dataset/melanoma-1508897682/img07/similar_images/simi_img16.jpeg
 /Users/vincent/Desktop/crispy-winner/dataset/melanoma-1508897682/img07/similar_images/simi_img17.jpeg
 /Users/vincent/Desktop/crispy-winner/dataset/melanoma-1508897682/img07/similar_images/simi_img18.jpeg
-/Users/vincent/Desktop/crispy-winner/dataset/melanoma-1508897682/img07/similar_images/simi_img19 (1).jpeg
 /Users/vincent/Desktop/crispy-winner/dataset/melanoma-1508897682/img07/similar_images/simi_img19.jpeg
 /Users/vincent/Desktop/crispy-winner/dataset/melanoma-1508897682/img07/similar_images/simi_img2.jpeg
 /Users/vincent/Desktop/crispy-winner/dataset/melanoma-1508897682/img07/similar_images/simi_img20.jpeg
@@ -724,7 +722,6 @@
 /Users/vincent/Desktop/crispy-winner/dataset/melanoma-1508897682/img08/similar_images/simi_img20.jpeg
 /Users/vincent/Desktop/crispy-winner/dataset/melanoma-1508897682/img08/similar_images/simi_img21.jpeg
 /Users/vincent/Desktop/crispy-winner/dataset/melanoma-1508897682/img08/similar_images/simi_img22.jpeg
-/Users/vincent/Desktop/crispy-winner/dataset/melanoma-1508897682/img08/similar_images/simi_img23 (1).jpeg
 /Users/vincent/Desktop/crispy-winner/dataset/melanoma-1508897682/img08/similar_images/simi_img23.jpeg
 /Users/vincent/Desktop/crispy-winner/dataset/melanoma-1508897682/img08/similar_images/simi_img24.jpeg
 /Users/vincent/Desktop/crispy-winner/dataset/melanoma-1508897682/img08/similar_images/simi_img25.jpeg
