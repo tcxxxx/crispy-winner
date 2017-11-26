@@ -45,7 +45,6 @@
 /Users/vincent/Desktop/crispy-winner/dataset/sub_datasets/skinnevus-1509524151/img01/similar_images/simi_img5.jpeg
 /Users/vincent/Desktop/crispy-winner/dataset/sub_datasets/skinnevus-1509524151/img01/similar_images/simi_img50.jpeg
 /Users/vincent/Desktop/crispy-winner/dataset/sub_datasets/skinnevus-1509524151/img01/similar_images/simi_img51.jpeg
-/Users/vincent/Desktop/crispy-winner/dataset/sub_datasets/skinnevus-1509524151/img01/similar_images/simi_img52.jpeg
 /Users/vincent/Desktop/crispy-winner/dataset/sub_datasets/skinnevus-1509524151/img01/similar_images/simi_img53.jpeg
 /Users/vincent/Desktop/crispy-winner/dataset/sub_datasets/skinnevus-1509524151/img01/similar_images/simi_img54.jpeg
 /Users/vincent/Desktop/crispy-winner/dataset/sub_datasets/skinnevus-1509524151/img01/similar_images/simi_img55.png

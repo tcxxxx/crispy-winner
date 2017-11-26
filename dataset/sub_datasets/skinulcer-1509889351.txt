@@ -165,7 +165,6 @@
 /Users/vincent/Desktop/crispy-winner/dataset/sub_datasets/skinulcer-1509889351/img01/similar_images/simi_img79.jpeg
 /Users/vincent/Desktop/crispy-winner/dataset/sub_datasets/skinulcer-1509889351/img01/similar_images/simi_img8.jpeg
 /Users/vincent/Desktop/crispy-winner/dataset/sub_datasets/skinulcer-1509889351/img01/similar_images/simi_img80.jpeg
-/Users/vincent/Desktop/crispy-winner/dataset/sub_datasets/skinulcer-1509889351/img01/similar_images/simi_img81.jpeg
 /Users/vincent/Desktop/crispy-winner/dataset/sub_datasets/skinulcer-1509889351/img01/similar_images/simi_img82.jpeg
 /Users/vincent/Desktop/crispy-winner/dataset/sub_datasets/skinulcer-1509889351/img01/similar_images/simi_img83.jpeg
 /Users/vincent/Desktop/crispy-winner/dataset/sub_datasets/skinulcer-1509889351/img01/similar_images/simi_img84.jpeg
