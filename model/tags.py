@@ -201,6 +201,8 @@ if __name__ == "__main__":
     for set in target_symptoms_list:
         for symptom in set:
             checkCurrentData(symptom.replace(" ", ""))
+    
+    generate_file_list('dataset/normalskin', label=1)
     # tag diseases:
     tag_disease(target_diseases_list)
     # tag symptoms:
