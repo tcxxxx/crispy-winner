@@ -283,7 +283,9 @@ def generate_file_list(root_dir, label=1):
                         if any(ext in item_path for ext in standardFormat):
                             try:
                                 tempF = Image.open(item_path)
+                                tempF.load()
                             except Exception as e:
+                                print(item_path)
                                 os.remove(item_path)
                             else:
                                 statinfo = os.stat(item_path)
