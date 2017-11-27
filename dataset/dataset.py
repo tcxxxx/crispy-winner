@@ -333,8 +333,8 @@ def checkCurrentData(query):
     for item in dir_list:
         item = item.lower()
         if (query.lower() in item) and (extension in item):
-             dir_for_query = item.split('.')[0]
-             # print dir_for_query
+            dir_for_query = item.split('.')[0]
+            print "dir for query: " + dir_for_query
     
     if len(dir_for_query) != 0:
         generate_file_list(dataset_dir + '/' + dir_for_query, label=1)        
