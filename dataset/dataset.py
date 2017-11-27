@@ -331,8 +331,8 @@ def checkCurrentData(query):
     dir_for_query = ''
 
     for item in dir_list:
-        item = item.lower()
-        if (query.lower() in item) and (extension in item):
+        item_lower = item.lower()
+        if (query.lower() in item_lower) and (extension in item_lower):
             dir_for_query = item.split('.')[0]
             print "dir for query: " + dir_for_query
     
