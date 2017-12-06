@@ -121,9 +121,9 @@ class Model_Combination(object):
                   snapshot_epoch=True, run_id=self.runId)
 
 X0, Y0 = image_preloader(dataset_file, image_shape=(100, 100), mode='file', categorical_labels=True, normalize=True, filter_channel=True)
-X1, Y1 = image_preloader(sub_file1, image_shape=(100, 100), mode='file', categorical_labels=True, normalize=True, filter_channel=True)
-X2, Y2 = image_preloader(sub_file2, image_shape=(100, 100), mode='file', categorical_labels=True, normalize=True, filter_channel=True)
-X3, Y3 = image_preloader(sub_file3, image_shape=(100, 100), mode='file', categorical_labels=True, normalize=True, filter_channel=True)
+X1, Y1 = image_preloader(sub_file1, image_shape=(100, 100), mode='file', categorical_labels=False, normalize=True, filter_channel=True)
+X2, Y2 = image_preloader(sub_file2, image_shape=(100, 100), mode='file', categorical_labels=False, normalize=True, filter_channel=True)
+X3, Y3 = image_preloader(sub_file3, image_shape=(100, 100), mode='file', categorical_labels=False, normalize=True, filter_channel=True)
 
 def train_model0():
     tf.reset_default_graph()
@@ -162,9 +162,7 @@ def train_combination_model():
 if __name__ == "__main__":
     train_model0()
     train_model1()
-    '''
     train_model2()
     train_model3()
-    '''
     train_combination_model()
 
