@@ -2,13 +2,14 @@ from __future__ import division, print_function, absolute_import
 
 import os
 import sys
-import tflearn
+import tflearn_m
 import tensorflow as tf
-from tflearn.layers.core import input_data, dropout, fully_connected
-from tflearn.layers.conv import conv_2d, max_pool_2d
-from tflearn.layers.normalization import local_response_normalization, batch_normalization
-from tflearn.layers.estimator import regression
-from tflearn.data_utils import image_preloader
+
+from tflearn_m.layers.core import input_data, dropout, fully_connected
+from tflearn_m.layers.conv import conv_2d, max_pool_2d
+from tflearn_m.layers.normalization import local_response_normalization, batch_normalization
+from tflearn_m.layers.estimator import regression
+from tflearn_m.data_utils import image_preloader
 
 os.environ["CUDA_VISIBLE_DEVICES"]="0"
 os.environ["PYTHONUNBUFFERED"]="1"
@@ -27,7 +28,7 @@ class Model(object):
         network = input_data(shape=[None, 100, 100, 3], name="input")
         network = self.make_core_network(network)
         network = regression(network, optimizer='momentum', loss='categorical_crossentropy', learning_rate=0.001)
-        model = tflearn.DNN(network, tensorboard_verbose=3)
+        model = tflearn_m.DNN(network, tensorboard_verbose=3)
         self.model = model
     
     @staticmethod
@@ -57,14 +58,11 @@ class Model(object):
         network = dropout(network, 0.5)
         network = fully_connected(network, 256, activation='tanh')
         network = dropout(network, 0.5)
-
-        if mode == True:
-            network = fully_connected(network, 4, activation='softmax')
-
+        network = fully_connected(network, 4, activation='softmax')
         return network
 
     def train(self, X, Y):
-        self.model.fit(X, Y, n_epoch=80, validation_set=0.2, shuffle=True,
+        self.model.fit(X, Y, n_epoch=3, validation_set=0.2, shuffle=True,
                   show_metric=True, batch_size=16, snapshot_step=200,
                   snapshot_epoch=True, run_id=self.runId)
 
@@ -111,7 +109,7 @@ class Model_Combination(object):
             self.model.load(mfn, scope_for_restore="scope3", weights_only=True)
 
     def train(self, X, Y):
-        self.model.fit(X, Y, n_epoch=80, validation_set=0.2, shuffle=True,
+        self.model.fit(X, Y, n_epoch=3, validation_set=0.2, shuffle=True,
                   show_metric=True, batch_size=16, snapshot_step=200,
                   snapshot_epoch=True, run_id=self.runId)
 
