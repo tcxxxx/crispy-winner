@@ -72,32 +72,38 @@ class Model_Combination(object):
     '''
     def __init__(self, runId):
         self.runId = runId
-        inputs = input_data(shape=[None, 100, 100, 4], name="input")
+        inputs = input_data(shape=[None, 100, 100, 3], name="input")
 
         with tf.variable_scope("scope0") as scope:
             net_alex0 = Model.make_core_network(inputs, mode=False)
         with tf.variable_scope("scope1") as scope:
             net_alex1 = Model.make_core_network(inputs, mode=False)
+        '''
         with tf.variable_scope("scope2") as scope:
             net_alex2 = Model.make_core_network(inputs, mode=False)
         with tf.variable_scope("scope3") as scope:
             net_alex3 = Model.make_core_network(inputs, mode=False)
-
-        network = tf.concat([net_alex0, net_alex1, net_alex2, net_alex3], 1, name="concat")
+        '''
+        # network = tf.concat([net_alex0, net_alex1, net_alex2, net_alex3], 1, name="concat")
+        network = tf.concat([net_alex0, net_alex1], 1, name="concat")
         network = fully_connected(network, 256 * 3, activation='tanh')   # 256
         network = dropout(network, 0.5)
         network = fully_connected(network, 256 * 3, activation='tanh')   # 256
         network = dropout(network, 0.5)
-        network = tflearn.fully_connected(network, 4, activation="softmax")
+        network = fully_connected(network, 4, activation="softmax")
         network = regression(network, optimizer='momentum', learning_rate=0.001, loss='categorical_crossentropy', name='target')
-        self.model = tflearn.DNN(network, tensorboard_verbose=0)
-
+        self.model = tflearn_m.DNN(network, tensorboard_verbose=0)
+    '''
     def load_weights(self, m0fn, m1fn, m2fn, m3fn):
         self.model.load(m0fn, scope_for_restore="scope0", weights_only=True)
         self.model.load(m1fn, scope_for_restore="scope1", weights_only=True, create_new_session=False)
         self.model.load(m2fn, scope_for_restore="scope2", weights_only=True, create_new_session=False)
         self.model.load(m3fn, scope_for_restore="scope3", weights_only=True, create_new_session=False)
-
+    '''
+    def load_weights(self, m0fn, m1fn):
+        self.model.load(m0fn, scope_for_restore="scope0", weights_only=True)
+        self.model.load(m1fn, scope_for_restore="scope1", weights_only=True, create_new_session=False)
+    '''
     def load_weights_p(self, mfn, number):
         if number == 1:
             self.model.load(mfn, scope_for_restore="scope0", weights_only=True)
@@ -107,6 +113,7 @@ class Model_Combination(object):
             self.model.load(mfn, scope_for_restore="scope2", weights_only=True)
         elif number == 4:
             self.model.load(mfn, scope_for_restore="scope3", weights_only=True)
+    '''
 
     def train(self, X, Y):
         self.model.fit(X, Y, n_epoch=3, validation_set=0.2, shuffle=True,
@@ -146,9 +153,8 @@ def train_combination_model():
     tf.reset_default_graph()
     m4 = Model_Combination("model-combination")
     m4.load_weights(
-        "model/model_saved/model1/model1.tfl", 
-        "model/model_saved/model2/model2.tfl", 
-        "model/model_saved/model3/model3.tfl"
+        "model/model_saved/model0/model0.tfl", 
+        "model/model_saved/model1/model1.tfl"
     )
     m4.train(X0, Y0)
     m4.model.save("model/model_saved/model4/model4.tfl")
@@ -156,7 +162,9 @@ def train_combination_model():
 if __name__ == "__main__":
     train_model0()
     train_model1()
+    '''
     train_model2()
     train_model3()
+    '''
     train_combination_model()
 
